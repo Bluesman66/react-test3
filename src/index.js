@@ -18,13 +18,15 @@ const normalizedData = normalize(apiResponse, lesson);
 
 const reducer = (state = normalizedData.entities, action) => {
 	if (action.type === 'LIKE_COMMENT') {
+		const { comments } = state;
+		const { commentId: id } = action;
 		return {
 			...state,
 			comments: {
-				...state.comments,
-				[action.commentId]: {
-					...state.comments[action.commentId],
-					likes: state.comments[action.commentId].likes + 1
+				...comments,
+				[id]: {
+					...comments[id],
+					likes: comments[id].likes + 1
 				}
 			}
 		}
